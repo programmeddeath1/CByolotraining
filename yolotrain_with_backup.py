@@ -406,6 +406,10 @@ def train(hyp, opt, device, tb_writer=None):
                 max_score = max(file_scores)
             else:
                 max_score = 0
+            print(f"Current Score is {curr_score}")
+            print("[P, R, mAP@.5, mAP@.5-.95]")
+            print(np.array(results).reshape(1, -1))
+            print(results)
             if (epoch + 1) % opt.save_period == 0 and int(curr_score) > int(max_score):
                 ckpt = {'epoch': epoch,
                         'best_fitness': best_fitness,
