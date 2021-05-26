@@ -400,7 +400,7 @@ def train(hyp, opt, device, tb_writer=None):
                         file_scores.append(filename.split('/')[-1].split('_')[1])
                         filepaths.append(subdir+os.sep+filename)
                 if len(filepaths) > int(opt.save_no):
-                    oldest_file = filepaths.index(min(file_scores))
+                    oldest_file = filepaths[file_scores.index(min(file_scores))]
                     os.remove(oldest_file)
             if len(file_scores) != 0:
                 max_score = max(file_scores)
