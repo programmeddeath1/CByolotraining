@@ -406,7 +406,7 @@ def train(hyp, opt, device, tb_writer=None):
                 max_score = max(file_scores)
             else:
                 max_score = 0
-            if (epoch + 1) % opt.save_period == 0 and int(curr_score) > max_score:
+            if (epoch + 1) % opt.save_period == 0 and int(curr_score) > int(max_score):
                 ckpt = {'epoch': epoch,
                         'best_fitness': best_fitness,
                         'training_results': results_file.read_text(),
