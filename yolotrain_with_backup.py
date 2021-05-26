@@ -418,6 +418,7 @@ def train(hyp, opt, device, tb_writer=None):
                 nametxt = f'{epoch}'+'_'+ f'{curr_score}'+'_' +'best.pt'
                 name = wdir / nametxt
                 torch.save(ckpt, name)
+                strip_optimizer(f=name,s=name)
             if (not opt.nosave) or (final_epoch and not opt.evolve):  # if save
                 ckpt = {'epoch': epoch,
                         'best_fitness': best_fitness,
