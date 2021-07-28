@@ -338,14 +338,12 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
         lr = [x['lr'] for x in optimizer.param_groups]  # for loggers
         scheduler.step()
 
-        # DDP process 0 or single-GPU
         if RANK in [-1, 0]:
             # mAP
             loggers.on_train_epoch_end(epoch)
             ema.update_attr(model, include=['yaml', 'nc', 'hyp', 'names', 'stride', 'class_weights'])
             final_epoch = epoch + 1 == epochs
             if not noval or final_epoch:  # Calculate mAP
-                wandb_logger.current_epoch = epoch + 1
                 results, maps, _ = val.run(data_dict,
                                            batch_size=batch_size // WORLD_SIZE * 2,
                                            imgsz=imgsz,
