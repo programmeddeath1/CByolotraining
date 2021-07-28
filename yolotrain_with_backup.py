@@ -368,7 +368,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
             f2 = f"{newfi:.3f}"
             f3 = float(f2)*1000
             curr_score = f"{int(f3):0>3}"
-            for subdir,dirs,files in os.walk(wdir):
+            for subdir,dirs,files in os.walk(w):
                 file_epochs = []
                 file_scores = []
                 filepaths = []
@@ -397,7 +397,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
                         'optimizer': optimizer.state_dict(),
                         'wandb_id': wandb_logger.wandb_run.id if wandb_logger.wandb else None}           
                 nametxt = f'{epoch}'+'_'+ f'{curr_score}'+'_' +'best.pt'
-                name = wdir / nametxt
+                name = w / nametxt
                 torch.save(ckpt, name)
                 strip_optimizer(f=name,s=name)
             if (not nosave) or (final_epoch and not evolve):  # if save
